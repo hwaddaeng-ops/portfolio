@@ -40,3 +40,6 @@ node_modules/
 Thumbs.db
 desktop.ini
 .DS_Store
+
+# Vercel 연결 정보 (vercel link가 자동으로 만듦, .env.local 키 파일은 맨 위 .env.* 규칙으로 막힘)
+.vercel

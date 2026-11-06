@@ -323,3 +323,9 @@
     - README에 Vercel 배포 순서(GitHub 연결, Root Directory는 ./ 그대로) + 로컬 미리보기 방법 추가
     - 사용자 선택: 첫 화면 다크 버전 · 이메일 그대로 공개 · 링크 미리보기 뺌 (HTML 파일은 손대지 않음)
     - 확인: portfolio 폴더만 띄운 로컬 서버에서 메인 2개·서브페이지·CSS·JS·이미지 200, CLAUDE.md·.env·tasks는 404
+73. Vercel 배포 (사용자 지시: "미리보기 서버 꺼주고 배포해줘")
+    - 미리보기 서버(python http.server 8765) 종료 확인
+    - Vercel CLI 65.12.0 설치(npm -g), 사용자가 직접 `vercel login` (계정 hwaddaeng-ops)
+    - CLI로 직접 올리지 않고 GitHub 연결 방식 선택: 배포 파일 193.8MB > 문서상 Hobby CLI 업로드 한도 100MB
+    - `vercel link` → 프로젝트 hwaddaeng-ops/portfolio 생성 + GitHub 저장소 자동 연결 (푸시마다 자동 배포)
+    - vercel link가 `.gitignore`에 넣은 `.env*` 줄이 `.env.example`까지 무시하게 돼서 `.vercel`만 남김 (`.env.local` 키 파일은 기존 `.env.*` 규칙으로 계속 막힘)
