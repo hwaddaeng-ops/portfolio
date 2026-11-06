@@ -251,8 +251,8 @@ footer { padding-block: 13px; color: var(--faint); font-size: 12px; line-height:
   .hwport_port_kpi-num { font-size: 30px; }
   .hwport_port_kpi-label { font-size: 11.5px; }
   .hwport_port_kpi-label b { font-size: 12.5px; }
-  /* 경력: 회사 이름 28px, 대행사는 다음 줄 18px, 줄 사이 간격 4px씩 더 */
-  .hwport_port_job h3 { font-size: 28px; }
+  /* 경력: 회사 이름 36px, 대행사는 다음 줄 18px, 줄 사이 간격 4px씩 더 */
+  .hwport_port_job h3 { font-size: 36px; }
   .hwport_port_job h3 .hwport_port_agency { display: block; font-size: 18px; margin-left: 0; }
   .hwport_port_job .hwport_port_via { font-size: 14px; margin-bottom: 22px; }
   .hwport_port_job ul.hwport_port_work { margin-bottom: 22px; }
