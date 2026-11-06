@@ -178,6 +178,12 @@ section { padding-block: 112px; scroll-margin-top: 64px; }
 .hwport_port_works a::after { content: " ↗"; font-size: 11px; color: var(--muted); }
 .hwport_port_works a:hover { color: var(--teal); border-color: rgba(140, 199, 178, .45); }
 
+/* 라벨(사이트·작업물)은 왼쪽 칸에 고정, 링크는 오른쪽 칸 안에서만 줄바꿈 */
+.hwport_port_links, .hwport_port_works { flex-wrap: nowrap; align-items: baseline; }
+.hwport_port_row-items { display: flex; flex-wrap: wrap; align-items: baseline; flex: 1; min-width: 0; }
+.hwport_port_links .hwport_port_row-items { gap: 6px 18px; }
+.hwport_port_works .hwport_port_row-items { gap: 8px; }
+
 /* 기술: 메인 숫자 박스와 같은 둥근 네모 박스 3개 */
 .hwport_port_skills { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 32px; }
 .hwport_port_skill {
