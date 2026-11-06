@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portfolio | 이화윤 UI/UX 디자이너</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Crect width='28' height='28' rx='8' fill='%232f5d50'/%3E%3Cpath d='M10 21V7h5a4.5 4.5 0 0 1 0 9h-5' fill='none' stroke='%23fafaf8' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='20' cy='20.5' r='1.8' fill='%23e8a86b'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  :root {
+    --bg: #fafaf8;
+    --surface: #ffffff;
+    --text: #1c1c1e;
+    --muted: #6b6b70;
+    --line: #e6e4df;
+    --accent: #2f5d50;
+    --accent-soft: #e8f0ec;
+    --header-scrolled: #ffffff;
+    --max: 1040px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #141515;
+      --surface: #1c1d1e;
+      --text: #ececea;
+      --muted: #9a9a9e;
+      --line: #2e3030;
+      --accent: #8cc7b2;
+      --accent-soft: #1f2b27;
+      --header-scrolled: #1c1d1e;  /* 다크 모드에서는 흰색 대신 어두운 면 색 */
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Pretendard", "Malgun Gothic", "Apple SD Gothic Neo", system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    word-break: keep-all;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding-inline: 24px; }
+
+  /* 상단 메뉴 */
+  /* 맨 위: 배경 완전 투명(사진 위에 겹침), 글자·로고는 흰색으로 반전 */
+  header {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 10;
+    background: transparent;
+    --ease: cubic-bezier(.22, .61, .36, 1);  /* 빠르게 시작해서 천천히 멈춤 */
+    --dur: .6s;
+  }
+  /* 흰 배경·경계선·그림자를 한 층에 담아 투명도만 서서히 바꿈 */
+  header::before {
+    content: ""; position: absolute; inset: 0; z-index: -1;
+    background: var(--header-scrolled);
+    border-bottom: 1px solid var(--line);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, .06);
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease);
+  }
+  header.scrolled::before { opacity: 1; transform: none; }
+  header:not(.scrolled) .logo-text,
+  header:not(.scrolled) nav a { color: #fff; }
+  header:not(.scrolled) nav a { opacity: .85; }
+  header:not(.scrolled) nav a:hover { opacity: 1; color: #fff; }
+  header:not(.scrolled) .logo-mark rect { fill: #fff; }
+  header:not(.scrolled) .logo-mark path { stroke: #2a1d13; }
+  /* 글자·로고 색도 배경과 같은 속도로 바뀜 */
+  header .logo-text, header nav a, header .logo-mark rect, header .logo-mark path {
+    transition: color var(--dur) var(--ease), fill var(--dur) var(--ease),
+                stroke var(--dur) var(--ease), opacity var(--dur) var(--ease);
+  }
+  /* 움직임 줄이기 설정을 켠 사용자에게는 애니메이션 없이 바로 바뀜 */
+  @media (prefers-reduced-motion: reduce) {
+    header { --dur: 0s; }
+  }
+  header .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+  .logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+  .logo-mark { width: 28px; height: 28px; flex: none; transition: transform .2s; }
+  .logo:hover .logo-mark { transform: rotate(-6deg); }
+  .logo-text { font-size: 19px; font-weight: 800; letter-spacing: -0.03em; }
+  .logo-dot { color: #e8a86b; }
+  nav { display: flex; gap: 24px; }
+  nav a { text-decoration: none; color: var(--muted); font-size: 15px; }
+  nav a:hover { color: var(--accent); }
+
+  /* 소개 */
+  /* 배경 사진 + 딤(어두운 막): 글씨가 있는 왼쪽을 더 어둡게 */
+  .hero {
+    padding-block: 160px 96px;  /* 헤더(60px)가 위에 겹치므로 그만큼 더 띄움 */
+    color: #fff;
+    background:
+      linear-gradient(90deg, rgba(28, 18, 10, .84) 0%, rgba(28, 18, 10, .62) 55%, rgba(28, 18, 10, .38) 100%),
+      url("images/hero.jpg") center / cover no-repeat,
+      #2a1d13;
+  }
+  .eyebrow { color: #f0c89a; font-weight: 600; font-size: 15px; margin: 0 0 16px; }
+  .hero h1 {
+    font-size: clamp(36px, 6vw, 60px);
+    line-height: 1.2; letter-spacing: -0.03em;
+    margin: 0 0 24px; font-weight: 700;
+    text-shadow: 0 2px 16px rgba(0, 0, 0, .35);
+  }
+  .nb { display: inline-block; }  /* 이 묶음 안에서는 줄이 안 바뀜 */
+  .hero p.lead { font-size: clamp(17px, 2vw, 20px); color: rgba(255, 255, 255, .85); max-width: 620px; margin: 0 0 40px; }
+  .stats { display: flex; flex-wrap: wrap; gap: 16px 48px; padding: 0; margin: 0; list-style: none; }
+  .stats strong { display: block; font-size: 28px; font-weight: 700; letter-spacing: -0.02em; }
+  .stats span { color: rgba(255, 255, 255, .72); font-size: 14px; }
+  .hero + section { border-top: 0; }
+
+  /* 공통 섹션 */
+  section { padding-block: 72px; border-top: 1px solid var(--line); scroll-margin-top: 60px; }
+  .section-title { display: flex; align-items: baseline; gap: 12px; margin: 0 0 40px; }
+  .section-title h2 { font-size: 28px; letter-spacing: -0.02em; margin: 0; }
+  .section-title span { color: var(--muted); font-size: 14px; }
+
+  /* 경력 */
+  .job {
+    display: grid; grid-template-columns: 220px 1fr; gap: 32px;
+    padding-block: 32px; border-bottom: 1px solid var(--line);
+  }
+  .job:first-of-type { padding-top: 0; }
+  .job:last-child { border-bottom: 0; padding-bottom: 0; }
+  .job .period { color: var(--muted); font-size: 15px; font-variant-numeric: tabular-nums; }
+  .job .badge {
+    display: inline-block; margin-top: 8px; padding: 2px 10px; border-radius: 999px;
+    background: var(--accent-soft); color: var(--accent); font-size: 13px; font-weight: 600;
+  }
+  .job h3 { font-size: 21px; margin: 0 0 4px; letter-spacing: -0.01em; }
+  .job .via { color: var(--muted); font-size: 15px; margin: 0 0 16px; }
+  .job ul { margin: 0 0 16px; padding-left: 18px; }
+  .job li { margin-bottom: 6px; }
+  .job li small { color: var(--muted); font-size: 14px; margin-left: 6px; }
+  .job .tags { padding-left: 0; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; padding: 0; margin: 0; list-style: none; }
+  .tags li {
+    font-size: 13px; padding: 3px 10px; border: 1px solid var(--line);
+    border-radius: 6px; color: var(--muted); background: var(--surface);
+  }
+
+  .links { display: flex; flex-wrap: wrap; gap: 4px 16px; margin: 14px 0 0; font-size: 14px; }
+  .links a { color: var(--accent); text-decoration: none; }
+  .links a::after { content: " ↗"; font-size: 12px; }
+  .links a:hover { text-decoration: underline; }
+
+  /* 기술 */
+  .skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 24px; }
+  .card h3 { margin: 0 0 12px; font-size: 16px; }
+  .card ul { list-style: none; margin: 0; padding: 0; }
+  .card li { display: flex; justify-content: space-between; gap: 12px; padding-block: 6px; border-bottom: 1px dashed var(--line); font-size: 15px; }
+  .card li:last-child { border-bottom: 0; }
+  .card li span { color: var(--muted); font-size: 14px; }
+
+  /* 연락처 */
+  .contact h2 { font-size: clamp(28px, 4vw, 40px); letter-spacing: -0.02em; margin: 0 0 12px; }
+  .contact p { color: var(--muted); margin: 0 0 32px; }
+  .contact-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+  .contact-item {
+    display: block; text-decoration: none; background: var(--surface);
+    border: 1px solid var(--line); border-radius: 14px; padding: 24px;
+    transition: border-color .15s, transform .15s;
+  }
+  .contact-item:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .contact-item small { display: block; color: var(--muted); font-size: 13px; margin-bottom: 4px; }
+  .contact-item strong { font-size: 17px; color: var(--accent); word-break: break-all; }
+
+  footer { padding-block: 40px; color: var(--muted); font-size: 13px; border-top: 1px solid var(--line); }
+  .footer-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; }
+  .logo-sm { color: var(--text); gap: 8px; }
+  .logo-sm .logo-mark { width: 22px; height: 22px; }
+  .logo-sm .logo-text { font-size: 16px; }
+
+  /* 태블릿 */
+  @media (max-width: 820px) {
+    .job { grid-template-columns: 1fr; gap: 12px; }
+    .hero {
+      padding-block: 116px 64px;  /* 헤더(60px)가 위에 겹치므로 그만큼 더 띄움 */
+      /* 좁은 화면은 글씨가 사진 전체에 걸치므로 고르게 어둡게 */
+      background:
+        linear-gradient(rgba(28, 18, 10, .72), rgba(28, 18, 10, .72)),
+        url("images/hero.jpg") 60% center / cover no-repeat,
+        #2a1d13;
+    }
+  }
+  /* 휴대폰 */
+  @media (max-width: 520px) {
+    .wrap { padding-inline: 18px; }
+    nav { gap: 14px; }
+    nav a { font-size: 14px; }
+    section { padding-block: 56px; }
+    .stats { gap: 16px 32px; }
+    .stats strong { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Portfolio 처음으로">
+      <svg class="logo-mark" viewBox="0 0 28 28" aria-hidden="true">
+        <rect width="28" height="28" rx="8" fill="var(--accent)"/>
+        <path d="M10 21V7h5a4.5 4.5 0 0 1 0 9h-5" fill="none" stroke="var(--bg)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="20" cy="20.5" r="1.8" fill="#e8a86b"/>
+      </svg>
+      <span class="logo-text">Portfolio<span class="logo-dot">.</span></span>
+    </a>
+    <nav>
+      <a href="#career">경력</a>
+      <a href="#skills">기술</a>
+      <a href="#contact">연락처</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero"><div class="wrap">
+    <p class="eyebrow">UI/UX Designer &amp; Publisher</p>
+    <h1><span class="nb">사용자의 경험을</span> <span class="nb">먼저 생각하는</span><br>UI/UX 디자이너입니다.</h1>
+    <p class="lead">
+      안녕하세요, 이화윤입니다. 화면을 쓰는 사람이 어디서 머뭇거리고 무엇을 편하게 느끼는지
+      살피는 것에서 디자인을 시작합니다. 2009년부터 쇼핑몰·브랜드 사이트를 거쳐 지금은
+      대기업 업무 시스템까지, 사용자 경험을 바탕으로 화면을 설계하고 직접 퍼블리싱해 왔습니다.
+    </p>
+    <ul class="stats">
+      <li><strong>2009~</strong><span>웹디자인 시작</span></li>
+      <li><strong>14+</strong><span>참여 프로젝트</span></li>
+      <li><strong>웹디자인 기능사</strong><span>2014.12 취득</span></li>
+    </ul>
+  </div></div>
+
+  <section id="career">
+    <div class="wrap">
+      <div class="section-title"><h2>경력</h2><span>전체 10곳 · 최신순</span></div>
+
+      <article class="job">
+        <div>
+          <div class="period">2025.02 ~ 2025.12</div>
+          <span class="badge">프리랜서</span>
+        </div>
+        <div>
+          <h3>삼성전자</h3>
+          <p class="via">나무기술 · 디자인 및 퍼블리싱</p>
+          <ul>
+            <li>반도체 수율·품질·분석·판정 자동화시스템 (FLOPS)<small>2025.02 ~ 2025.12</small></li>
+            <li>반도체 Apphub (MES APP HUB) 퍼블리싱<small>2025.04 ~ 2025.10</small></li>
+          </ul>
+          <ul class="tags">
+            <li>HTML5</li><li>CSS3</li><li>SCSS</li><li>React HTML</li><li>Bootstrap</li>
+            <li>Photoshop</li><li>VS Code</li><li>Git</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="job">
+        <div>
+          <div class="period">2024.04 ~ 2024.08</div>
+          <span class="badge">프리랜서</span>
+        </div>
+        <div>
+          <h3>현대차</h3>
+          <p class="via">씨씨미디어 · 웹디자인 및 퍼블리싱</p>
+          <ul>
+            <li>탄소종합배출시스템 (SCEMS, GEMS, IGIS)</li>
+          </ul>
+          <ul class="tags">
+            <li>Figma</li><li>HTML5</li><li>CSS3</li><li>SCSS</li><li>Bootstrap</li>
+            <li>Photoshop</li><li>Illustrator</li><li>VS Code</li><li>Git</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="job">
+        <div>
+          <div class="period">2023.11 ~ 2023.12</div>
+          <span class="badge">프리랜서</span>
+        </div>
+        <div>
+          <h3>DB금융투자</h3>
+          <p class="via">제이크루컨설팅 · 웹디자인 및 퍼블리싱</p>
+          <ul>
+            <li>OPEN API 서비스</li>
+          </ul>
+          <ul class="tags">
+            <li>HTML5</li><li>CSS3</li><li>Bootstrap</li>
+            <li>Photoshop</li><li>Illustrator</li><li>SVN</li><li>Eclipse</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="job">
+        <div>
+          <div class="period">2023.01 ~ 2023.09</div>
+          <span class="badge">프리랜서</span>
+        </div>
+        <div>
+          <h3>삼성화재</h3>
+          <p class="via">제이크루컨설팅 · 웹디자인 및 퍼블리싱</p>
+          <ul>
+            <li>내부통제 감시시스템 (준법지원 시스템)<small>2023.01 ~ 2023.09</small></li>
+            <li>나무기술정보통신 VDI (재택 병행)<small>2023.02 ~ 2023.04</small></li>
+          </ul>
+          <ul class="tags">
+            <li>HTML5</li><li>CSS3</li><li>Bootstrap</li>
+            <li>Photoshop</li><li>Illustrator</li><li>Git</li><li>Eclipse</li><li>VS Code</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="job">
+        <div>
+          <div class="period">2021.06 ~ 2022.11</div>
+          <span class="badge">매니저</span>
+        </div>
+        <div>
+          <h3>아이비엘(주) / 아크도</h3>
+          <p class="via">웹디자인 및 퍼블리싱 · 모회사 와이더플래닛</p>
+          <ul>
+            <li>골프치트키 UI/UX 디자인 및 기획</li>
+            <li>아이뷰티랩 UI/UX 리뉴얼 디자인 및 기획</li>
+            <li>리빙픽 UI/UX 리뉴얼 디자인 및 기획</li>
+            <li>와이더플래닛 마케팅 솔루션 UI 디자인</li>
+            <li>LGU+ 스마트원격 진단 서비스 (아크도, 재택)<small>2022.11</small></li>
+            <li>그 외 사이트 운영 및 유지보수</li>
+          </ul>
+          <ul class="tags">
+            <li>HTML5</li><li>CSS3</li><li>Photoshop</li><li>Illustrator</li><li>Visual Studio</li>
+          </ul>
+          <p class="links">
+            <a href="https://www.golfcheatkey.com/" target="_blank" rel="noopener">골프치트키</a>
+            <a href="https://ibeautylab.co.kr/" target="_blank" rel="noopener">아이뷰티랩</a>
+            <a href="https://www.livingpick.com/" target="_blank" rel="noopener">리빙픽</a>
+            <a href="http://ihealth24.co.kr/index.html" target="_blank" rel="noopener">아이헬스24</a>
+            <a href="http://www.idasoni.com/" target="_blank" rel="noopener">이다소니</a>
+            <a href="http://www.nutriful.co.kr/" target="_blank" rel="noopener">뉴트리풀</a>
+          </p>
+        </div>
+      </article>
+
+      <article class="job">
+        <div>
+          <div class="period">2017.09 ~ 2020.11</div>
+          <span class="badge">대리</span>
+        </div>
+        <div>
+          <h3>(주)에이원</h3>
+          <p class="via">웹디자인 및 퍼블리싱</p>
+          <ul>
+            <li>리안 국내 및 글로벌 브랜드 사이트 UI/UX 디자인 및 기획</li>
+            <li>리안펫 브랜드 사이트 UI/UX 디자인 및 기획</li>
+            <li>그 외 사이트 운영 및 유지보수</li>
+          </ul>
+          <ul class="tags">
+            <li>HTML5</li><li>CSS3</li><li>Photoshop</li><li>Illustrator</li><li>Dreamweaver</li>
+          </ul>
+          <p class="links">
+            <a href="http://www.ryanbaby.co.kr" target="_blank" rel="noopener">리안</a>
+            <a href="https://www.ryanpet.co.kr/" target="_blank" rel="noopener">리안펫</a>
+            <a href="http://www.aonebaby.co.kr/" target="_blank" rel="noopener">에이원</a>
+          </p>
+        </div>
+      </article>
+
+      <article class="job">
+        <div>
+          <div class="period">2017.08 ~ 2017.09</div>
+          <span class="badge">대리</span>
+        </div>
+        <div>
+          <h3>디몰트</h3>
+          <p class="via">웹디자인 및 퍼블리싱 · 고객사 LF(LG패션)</p>
+          <ul>
+            <li>LFmall 운영</li>
+          </ul>
+          <ul class="tags">
+            <li>HTML5</li><li>CSS3</li><li>Photoshop</li><li>Illustrator</li><li>Dreamweaver</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="job">
+        <div>
+          <div class="period">2014.09 ~ 2017.07</div>
+          <span class="badge">사원</span>
+        </div>
+        <div>
+          <h3>(주)동인기연</h3>
+          <p class="via">웹디자인 및 퍼블리싱 · 아토판지아</p>
+          <ul>
+            <li>포브샵 국내 브랜드 &amp; 쇼핑몰 사이트, 포브 글로벌 브랜드 사이트 UI/UX 디자인</li>
+            <li>라파브리끄 · 팀벅2 브랜드 사이트 UI/UX 디자인</li>
+            <li>생산실적 시스템 · 스마트 카시트 온도 조절 · 경복 산우회 앱 UI/UX 디자인</li>
+            <li>운영 및 유지보수, UI/UX 개선 (디자인 &amp; HTML/CSS)</li>
+          </ul>
+          <ul class="tags">
+            <li>HTML5</li><li>CSS3</li><li>Photoshop</li><li>Illustrator</li><li>Dreamweaver</li>
+          </ul>
+          <p class="links">
+            <a href="http://www.myforb.com/" target="_blank" rel="noopener">포브</a>
+            <a href="http://dong-in.com/home/en/" target="_blank" rel="noopener">동인기연</a>
+            <a href="https://www.attopangea.com/shop/main/index.php" target="_blank" rel="noopener">아토판지아</a>
+          </p>
+        </div>
+      </article>
+
+      <article class="job">
+        <div>
+          <div class="period">2014.05 ~ 2014.08</div>
+          <span class="badge">사원</span>
+        </div>
+        <div>
+          <h3>(주)윙하우스</h3>
+          <p class="via">웹디자인</p>
+          <ul>
+            <li>자사몰 리뉴얼 및 운영</li>
+          </ul>
+          <ul class="tags">
+            <li>Photoshop</li><li>Illustrator</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="job">
+        <div>
+          <div class="period">2009.02 ~ 2013.07</div>
+          <span class="badge">사원</span>
+        </div>
+        <div>
+          <h3>아신약품(주)</h3>
+          <p class="via">웹디자인</p>
+          <ul>
+            <li>자사몰 리뉴얼 및 운영</li>
+          </ul>
+          <ul class="tags">
+            <li>Photoshop</li><li>Illustrator</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <div class="section-title"><h2>사용 기술</h2></div>
+      <div class="skills">
+        <div class="card">
+          <h3>디자인</h3>
+          <ul>
+            <li>Figma <span>상</span></li>
+            <li>Adobe Photoshop <span>상</span></li>
+            <li>Adobe Illustrator <span>상</span></li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>퍼블리싱</h3>
+          <ul>
+            <li>HTML5 <span>상</span></li>
+            <li>CSS3, SCSS <span>상</span></li>
+            <li>Git <span>중</span></li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>자격 · 교육</h3>
+          <ul>
+            <li>웹디자인 기능사 <span>2014.12</span></li>
+            <li>웹디자인 심화 과정 <span>디자인나스</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <h2>함께 일해요</h2>
+      <p>프로젝트 문의는 이메일로 편하게 연락 주세요.</p>
+      <div class="contact-list">
+        <a class="contact-item" href="mailto:angelho2@nate.com">
+          <small>이메일</small>
+          <strong>angelho2@nate.com</strong>
+        </a>
+        <a class="contact-item" href="https://angelho2.wixsite.com/2023/" target="_blank" rel="noopener">
+          <small>포트폴리오 (작업물 보기)</small>
+          <strong>angelho2.wixsite.com/2023</strong>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap footer-inner">
+    <a class="logo logo-sm" href="#top" aria-label="Portfolio 맨 위로">
+      <svg class="logo-mark" viewBox="0 0 28 28" aria-hidden="true">
+        <rect width="28" height="28" rx="8" fill="var(--accent)"/>
+        <path d="M10 21V7h5a4.5 4.5 0 0 1 0 9h-5" fill="none" stroke="var(--bg)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="20" cy="20.5" r="1.8" fill="#e8a86b"/>
+      </svg>
+      <span class="logo-text">Portfolio<span class="logo-dot">.</span></span>
+    </a>
+    <span>© 2026 Portfolio. All rights reserved.</span>
+  </div>
+</footer>
+
+<script>
+  // 조금이라도 스크롤하면 헤더에 scrolled 표시를 붙이고, 맨 위로 오면 뗌
+  (function () {
+    var header = document.querySelector('header');
+    function update() { header.classList.toggle('scrolled', window.scrollY > 8); }
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+  })();
+</script>
+
+</body>
+</html>

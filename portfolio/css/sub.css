@@ -1,0 +1,140 @@
+/* 포트폴리오 서브페이지(작업물 상세) 스타일 — style.css 다음에 불러옴 */
+
+.hwport_port_sub { padding-block: 112px 96px; }
+
+/* 돌아가기 버튼: 양 끝이 둥근 가로형 버튼
+   평소: 배경 투명(0%) + 테두리 1px / 마우스 올리면: 배경이 스크롤 시 헤더와 같은 그레이 */
+.hwport_port_back {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 9px 20px; border-radius: 999px;
+  border: 1px solid var(--line); background-color: transparent;
+  font-size: 14px; line-height: 1.4; color: var(--muted); text-decoration: none;
+  transition: background-color .25s var(--ease), border-color .25s var(--ease), color .25s var(--ease);
+}
+.hwport_port_back:hover,
+.hwport_port_back:focus-visible {
+  background-color: var(--header-gray); border-color: var(--header-gray); color: var(--text);
+}
+.hwport_port_back-bottom { margin-top: 56px; }
+
+/* 제목 영역: 메인의 섹션 제목처럼 아래 굵은 선 */
+.hwport_port_sub-head {
+  margin: 32px 0 0; padding-bottom: 28px; border-bottom: 1px solid var(--text);
+}
+.hwport_port_sub-meta { margin: 0 0 12px; font-size: 14px; color: var(--muted); }
+.hwport_port_sub-meta b { color: var(--teal); font-weight: 600; }
+.hwport_port_sub-head h1 {
+  margin: 0; font-weight: 700; font-size: clamp(32px, 4.4vw, 52px);
+  line-height: 1.2; letter-spacing: -0.035em;
+}
+.hwport_port_sub-lead { margin: 14px 0 0; font-size: 17px; color: var(--muted); }
+
+/* 작업 정보: 기술 박스와 같은 둥근 네모 */
+.hwport_port_sub-info {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 32px 0 0;
+}
+.hwport_port_sub-info > div {
+  padding: 22px 24px; border-radius: 16px;
+  background: var(--bg-2); border: 1px solid var(--line);
+}
+.hwport_port_sub-info dt { font-size: 13px; font-weight: 600; color: var(--teal); margin-bottom: 8px; }
+.hwport_port_sub-info dd { margin: 0; font-size: 15px; line-height: 1.6; }
+
+/* 이미지 */
+.hwport_port_sub-hint { margin: 56px 0 14px; font-size: 13px; color: var(--faint); }
+.hwport_port_sub-gap { height: 56px; }
+.hwport_port_sub-info dd a { color: var(--teal); text-decoration: none; word-break: break-all; }
+.hwport_port_sub-info dd a:hover { text-decoration: underline; }
+
+/* 이미지 목록: 2열 (1장이면 한 줄 전체) */
+.hwport_port_gallery { display: grid; gap: 24px; align-items: start; }
+.hwport_port_gallery-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.hwport_port_shot { margin: 0; }
+.hwport_port_shot-wide { grid-column: 1 / -1; }
+
+/* PC · 모바일 나눔: 왼쪽 PC, 오른쪽 모바일 */
+.hwport_port_gallery-split { gap: 56px; }
+.hwport_port_split {
+  padding-block: 0; /* 메인의 section 위아래 여백 안 받음 */
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 24px; align-items: start;
+}
+.hwport_port_split-title {
+  grid-column: 1 / -1; margin: 0; padding-bottom: 12px; border-bottom: 1px solid var(--line);
+  font-size: 17px; font-weight: 700; letter-spacing: -0.01em;
+}
+.hwport_port_col { display: grid; gap: 16px; align-content: start; }
+.hwport_port_col-label {
+  justify-self: start; margin: 0; padding: 4px 12px; border-radius: 999px;
+  border: 1px solid var(--line); font-size: 12px; font-weight: 600; color: var(--teal);
+}
+.hwport_port_zoom {
+  position: relative; display: block; overflow: hidden; border-radius: 16px;
+  border: 1px solid var(--line); background: var(--bg-2); cursor: zoom-in;
+}
+.hwport_port_zoom img { display: block; width: 100%; height: auto; transition: transform .5s var(--ease); }
+.hwport_port_zoom:hover img { transform: scale(1.015); }
+/* 원본 페이지에서 이미지에 걸려 있던 링크 (원본 파일·피그마·기획전) */
+.hwport_port_ext {
+  justify-self: start; display: inline-flex; align-items: center; gap: 4px;
+  margin-top: 10px; padding: 6px 14px; border-radius: 999px;
+  border: 1px solid var(--line); background-color: transparent;
+  font-size: 13px; line-height: 1.4; color: var(--muted); text-decoration: none;
+  transition: background-color .25s var(--ease), border-color .25s var(--ease), color .25s var(--ease);
+}
+.hwport_port_ext:hover,
+.hwport_port_ext:focus-visible { background-color: var(--header-gray); border-color: var(--header-gray); color: var(--text); }
+.hwport_port_col .hwport_port_ext { margin-top: -6px; }
+.hwport_port_shot figcaption { margin: 0 0 10px; font-size: 14px; font-weight: 600; color: var(--text); }
+
+/* 아주 긴 이미지(상세페이지 등): 윗부분만 보이고, 클릭하면 전체 */
+.hwport_port_zoom-tall { max-height: 760px; }
+.hwport_port_shot-wide .hwport_port_zoom-tall { max-height: 960px; }
+.hwport_port_zoom-tall::after {
+  content: ""; position: absolute; inset: auto 0 0; height: 140px; pointer-events: none;
+  background: linear-gradient(to bottom, rgba(20, 22, 23, 0), var(--bg));
+}
+.hwport_port_more {
+  position: absolute; left: 50%; bottom: 18px; z-index: 1; transform: translateX(-50%);
+  padding: 7px 16px; border-radius: 999px; white-space: nowrap;
+  background: var(--header-gray); border: 1px solid var(--line);
+  font-size: 13px; color: var(--text);
+}
+
+/* 크게 보기 (sub.js가 만듦) */
+.hwport_port_lightbox {
+  position: fixed; inset: 0; z-index: 50;
+  display: flex; align-items: flex-start; justify-content: flex-start;
+  overflow: auto; padding: 56px 20px 72px;
+  background: rgba(10, 11, 12, .92); cursor: zoom-out;
+}
+/* 화면 너비에 맞춤 → 이미지 클릭 시 원본 크기(가로·세로 스크롤) */
+.hwport_port_lightbox img {
+  flex: none; max-width: 100%; height: auto; margin-inline: auto;
+  border-radius: 12px; cursor: zoom-in;
+}
+.hwport_port_lightbox-full img { max-width: none; border-radius: 0; cursor: zoom-out; }
+.hwport_port_lightbox-tip {
+  position: fixed; left: 50%; bottom: 16px; transform: translateX(-50%); margin: 0;
+  padding: 7px 16px; border-radius: 999px; white-space: nowrap; pointer-events: none;
+  background: var(--header-gray); border: 1px solid var(--line); font-size: 13px; color: var(--text);
+}
+.hwport_port_lightbox-close {
+  position: fixed; top: 14px; right: 16px;
+  width: 40px; height: 40px; border-radius: 999px; border: 1px solid var(--line);
+  background: var(--bg-2); color: var(--text); font-size: 20px; line-height: 1; cursor: pointer;
+}
+.hwport_port_lightbox-close:hover { color: var(--teal); }
+
+/* 태블릿·휴대폰 */
+@media (max-width: 860px) {
+  .hwport_port_sub-info { grid-template-columns: 1fr; }
+}
+@media (max-width: 560px) {
+  .hwport_port_sub { padding-block: 96px 72px; }
+  .hwport_port_sub-lead { font-size: 16px; }
+  /* 휴대폰: 1열로 쌓기 (PC → 모바일 순서) */
+  .hwport_port_gallery-2,
+  .hwport_port_split { grid-template-columns: 1fr; }
+  .hwport_port_col-mo { margin-top: 8px; }
+  .hwport_port_zoom-tall { max-height: 560px; }
+}
