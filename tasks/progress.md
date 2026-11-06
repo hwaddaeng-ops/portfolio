@@ -334,3 +334,9 @@
     - 후보 5개 확인 후 사용자 선택: https://hwayoun-portfolio.vercel.app → Vercel 프로젝트 portfolio에 도메인 추가 (다음 배포에도 유지)
     - 확인: / → /index-dark.html 307, 메인·서브페이지·이미지 200, CLAUDE.md·.env 404 / 이전 주소도 그대로 동작
     - README에 사이트 주소 추가
+75. 모바일 경력 부분 다듬기 (사용자 지시, 화면 폭 560px 이하에만 적용 · PC는 그대로)
+    - 회사 이름(h3) 22px → 28px
+    - 대행사 `hwport_port_agency` 다음 줄로 내림(display:block) + 18px
+    - `hwport_port_via` 14px 고정 (원래도 14px), 아래 간격 18px → 22px
+    - `hwport_port_work` 아래 간격 18px → 22px (태그와 사이 4px 더)
+    - 확인: 390px 폭 캡처로 삼성전자·현대차·DB금융투자·나무기술정보통신 배치 확인 (이 class는 다크 메인 페이지에만 쓰임)
