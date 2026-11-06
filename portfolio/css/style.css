@@ -154,9 +154,10 @@ section { padding-block: 112px; scroll-margin-top: 64px; }
 .hwport_port_job ul.hwport_port_work li { position: relative; padding-left: 20px; margin-bottom: 6px; line-height: 1.5; }
 .hwport_port_job ul.hwport_port_work li::before { content: ""; position: absolute; left: 0; top: .75em; width: 10px; height: 1px; background: var(--teal); }
 .hwport_port_job ul.hwport_port_work small { color: var(--faint); font-size: 13px; margin-left: 8px; font-variant-numeric: tabular-nums; }
-.hwport_port_tags { display: flex; flex-wrap: wrap; gap: 4px 14px; padding: 0; margin: 0; list-style: none; }
+/* 태그 구분선 "/": 모든 태그 앞에 붙이고, 줄 맨 앞에 오는 "/"는 왼쪽으로 20px 밀어 잘라냄 (줄바꿈돼도 "/"로 시작하지 않음) */
+.hwport_port_tags { display: flex; flex-wrap: wrap; gap: 4px 14px; padding: 0; margin: 0 0 0 -20px; list-style: none; clip-path: inset(0 0 0 20px); }
 .hwport_port_tags li { font-size: 12.5px; color: var(--faint); letter-spacing: .02em; }
-.hwport_port_tags li + li::before { content: "/"; margin-right: 14px; color: var(--line); }
+.hwport_port_tags li::before { content: "/"; display: inline-block; width: 6px; text-align: center; margin-right: 14px; color: var(--line); }
 
 .hwport_port_links { display: flex; flex-wrap: wrap; gap: 6px 18px; margin: 16px 0 0; font-size: 14px; }
 .hwport_port_links a { color: var(--teal); text-decoration: none; border-bottom: 1px solid rgba(140, 199, 178, .3); transition: border-color .2s; }
