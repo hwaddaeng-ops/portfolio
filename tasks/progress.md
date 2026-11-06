@@ -329,3 +329,4 @@
     - CLI로 직접 올리지 않고 GitHub 연결 방식 선택: 배포 파일 193.8MB > 문서상 Hobby CLI 업로드 한도 100MB
     - `vercel link` → 프로젝트 hwaddaeng-ops/portfolio 생성 + GitHub 저장소 자동 연결 (푸시마다 자동 배포)
     - vercel link가 `.gitignore`에 넣은 `.env*` 줄이 `.env.example`까지 무시하게 돼서 `.vercel`만 남김 (`.env.local` 키 파일은 기존 `.env.*` 규칙으로 계속 막힘)
+    - 배포 성공(Ready): https://portfolio-nine-mocha-67nl0lrn1u.vercel.app — / → /index-dark.html 307, 메인·서브페이지·CSS·JS·이미지 200, CLAUDE.md·.env·.env.local·tasks·README·vercel.json 404, 보안 헤더 3개 확인
