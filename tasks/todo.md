@@ -95,4 +95,4 @@
 - [x] 2. `README.md` 새로 만들기 — 폴더 구조 트리 + 폴더별 설명
 - [x] 3. 올라갈 파일 목록 다시 검사 (`.env`·키·비밀번호가 없는지)
 - [x] 4. "Initial setup" 커밋
-- [ ] 5. GitHub에 private 저장소 만들고 올리기 → 비공개인지 확인 → progress.md 기록
+- [x] 5. GitHub에 private 저장소 만들고 올리기 → 비공개인지 확인 → progress.md 기록

@@ -314,3 +314,4 @@
     - `README.md` 새로 만듦: 폴더 구조 트리, 작업물 29개 분류표, 올리지 않는 파일 안내
     - 기록 새로 시작 (사용자 선택): 기존 기록은 `.git.bak` 폴더로 백업(지우지 않음), 새 기록 브랜치 main
     - 올라가는 파일 256개 확인: `.env`·`.env.bak`·`docs/` 프로필·`*.bak`은 제외됨, 내용에서 키 패턴 0건
+    - 올림: https://github.com/hwaddaeng-ops/portfolio (PRIVATE 확인), 커밋 1개 "Initial setup", GitHub 파일 256개 = 로컬과 같음, 비밀 파일 0
