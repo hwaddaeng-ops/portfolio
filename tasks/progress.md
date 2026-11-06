@@ -315,3 +315,11 @@
     - 기록 새로 시작 (사용자 선택): 기존 기록은 `.git.bak` 폴더로 백업(지우지 않음), 새 기록 브랜치 main
     - 올라가는 파일 256개 확인: `.env`·`.env.bak`·`docs/` 프로필·`*.bak`은 제외됨, 내용에서 키 패턴 0건
     - 올림: https://github.com/hwaddaeng-ops/portfolio (PRIVATE 확인), 커밋 1개 "Initial setup", GitHub 파일 256개 = 로컬과 같음, 비밀 파일 0
+72. 포트폴리오 웹 배포 준비 (사용자 지시: "웹 배포할 수 있도록 세팅, 버셀 배포는 직접")
+    - 점검: HTML 31개의 로컬 경로 389개 대소문자까지 확인 → 깨짐 0 (웹 서버는 대소문자를 구분함)
+    - `vercel.json` 새로 만듦: `portfolio` 폴더만 공개(outputDirectory), 첫 화면 / → /index-dark.html (307 redirect), 보안 헤더 3개
+      · rewrite가 아니라 redirect를 쓴 이유: Vercel 문서상 index.html 파일이 있으면 rewrite보다 파일이 먼저 나옴
+    - `.vercelignore` 새로 만듦: `.env`·키·docs·tasks·CLAUDE.md·SECURITY.md·백업 파일은 Vercel에 안 올라감
+    - README에 Vercel 배포 순서(GitHub 연결, Root Directory는 ./ 그대로) + 로컬 미리보기 방법 추가
+    - 사용자 선택: 첫 화면 다크 버전 · 이메일 그대로 공개 · 링크 미리보기 뺌 (HTML 파일은 손대지 않음)
+    - 확인: portfolio 폴더만 띄운 로컬 서버에서 메인 2개·서브페이지·CSS·JS·이미지 200, CLAUDE.md·.env·tasks는 404

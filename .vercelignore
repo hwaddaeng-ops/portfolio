@@ -1,0 +1,22 @@
+# Vercel에 올리지 않을 파일 (내 PC에서 vercel 명령으로 직접 올릴 때도 막아 줌)
+
+# 🔒 비밀 정보
+.env
+.env.*
+*.key
+*.pem
+id_rsa*
+*credentials*
+
+# 👤 개인정보·작업 기록·내부 문서 (웹에 공개할 필요 없음)
+docs/
+tasks/
+CLAUDE.md
+SECURITY.md
+
+# 백업·임시 파일
+*.bak
+.git.bak/
+*.tmp
+*.log
+node_modules/
