@@ -67,6 +67,8 @@ claude-workspace/
 
 ## 🚀 Vercel 배포
 
+**사이트 주소:** https://hwayoun-portfolio.vercel.app
+
 빌드 과정이 없는 정적 사이트라서 설정은 `vercel.json`에 다 들어 있어요. Vercel 화면에서 따로 바꿀 것은 없어요.
 
 **배포 설정 (`vercel.json`)**

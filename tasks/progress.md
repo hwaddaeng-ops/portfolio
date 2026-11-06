@@ -330,3 +330,7 @@
     - `vercel link` → 프로젝트 hwaddaeng-ops/portfolio 생성 + GitHub 저장소 자동 연결 (푸시마다 자동 배포)
     - vercel link가 `.gitignore`에 넣은 `.env*` 줄이 `.env.example`까지 무시하게 돼서 `.vercel`만 남김 (`.env.local` 키 파일은 기존 `.env.*` 규칙으로 계속 막힘)
     - 배포 성공(Ready): https://portfolio-nine-mocha-67nl0lrn1u.vercel.app — / → /index-dark.html 307, 메인·서브페이지·CSS·JS·이미지 200, CLAUDE.md·.env·.env.local·tasks·README·vercel.json 404, 보안 헤더 3개 확인
+74. 사이트 주소 쉬운 이름으로 (사용자 지시, 이름 철자 hwayoun)
+    - 후보 5개 확인 후 사용자 선택: https://hwayoun-portfolio.vercel.app → Vercel 프로젝트 portfolio에 도메인 추가 (다음 배포에도 유지)
+    - 확인: / → /index-dark.html 307, 메인·서브페이지·이미지 200, CLAUDE.md·.env 404 / 이전 주소도 그대로 동작
+    - README에 사이트 주소 추가
